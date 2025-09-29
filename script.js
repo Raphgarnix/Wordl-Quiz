@@ -1,4 +1,14 @@
 const body = document.getElementById('body');
+const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+
+
+
+
+
+
+
+
 
 const ArrayDeutscheWörter = [
     "aas", "abt", "ach", "aff", "akt", "alb", "all", "alt", "ami", "amt",
@@ -160,6 +170,8 @@ for(let i = 0; i < Deutsch.length; i++){
     break;
   }
 }
+
+
 function GamemodeView(){
   body.innerHTML = `
 
@@ -171,6 +183,165 @@ function GamemodeView(){
 
         </div>
     `;
+}
+
+
+function GamemodeViewMB(){
+  body.innerHTML = `
+
+        <div class="gamemodesPanel">
+            <div class="gamemodesObj" onclick="Deutsch3MB()"> Deutsch MOBILE3 Buchstaben <div>
+            <div class="gamemodesObj" onclick="Deutsch4MB()"> Deutsch MOBILE 4 Buchstaben <div> 
+            <div class="gamemodesObj" onclick="Deutsch5MB()"> Deutsch MOBILE 5 Buchstaben <div> 
+            <div class="gamemodesObj" onclick="Deutsch6MB()"> Deutsch MOBILE 6 Buchstaben <div> 
+
+        </div>
+    `;
+}
+
+function Deutsch3MB() {
+  body.innerHTML = `
+    <div class="gamemodeD3Panel">
+      <input type="text" id="inputBox" maxlength="3" placeholder="Buchstabe eingeben">
+      <div class="gamemodeD3Holder" id="gamemodeD3Holder1"></div>
+      <div class="gamemodeD3Holder" id="gamemodeD3Holder2"></div>
+      <div class="gamemodeD3Holder" id="gamemodeD3Holder3"></div>
+    </div>
+
+    <div class="versuchePanel">
+      <div class="versuch4" id="ersterVersuch">
+        <div class="letter" id="V1l1"></div>
+        <div class="letter" id="V1l2"></div>
+        <div class="letter" id="V1l3"></div>
+      </div>
+
+      <div class="versuch4" id="zweiterVersuch">
+        <div class="letter" id="V2l1"></div>
+        <div class="letter" id="V2l2"></div>
+        <div class="letter" id="V2l3"></div>      
+      </div>
+
+      <div class="versuch4" id="dritterVersuch">
+        <div class="letter" id="V3l1"></div>
+        <div class="letter" id="V3l2"></div>
+        <div class="letter" id="V3l3"></div>      
+      </div>
+
+      <div class="versuch4" id="vierterVersuch">
+        <div class="letter" id="V4l1"></div>
+        <div class="letter" id="V4l2"></div>
+        <div class="letter" id="V4l3"></div>      
+      </div>
+    </div>
+
+    <div class="endPanel" id="endPanel" style="visibility:hidden;">
+      <div class="endText" id="endText"></div>
+      <div class="endButton"></div>
+    </div>
+  `;
+
+  let versuchzähler = 1;
+  let Holder1, Holder2, Holder3;
+  [Holder1, Holder2, Holder3] = InitialisierenVonHolder();
+
+  function InitialisierenVonHolder() {
+    const h1 = document.getElementById(`V${versuchzähler}l1`);
+    const h2 = document.getElementById(`V${versuchzähler}l2`);
+    const h3 = document.getElementById(`V${versuchzähler}l3`);
+    return [h1, h2, h3];
+  }
+
+  const box = document.getElementById('inputBox');
+  const endPanel = document.getElementById('endPanel');
+
+  box.addEventListener('input', () => {
+    const Input = box.value.toUpperCase();
+    if (Holder1.textContent.length === 0) {
+      Holder1.textContent = Input;
+    } else if (Holder2.textContent.length === 0) {
+      Holder2.textContent = Input;
+    } else if (Holder3.textContent.length === 0) {
+      Holder3.textContent = Input;
+    }
+    box.value = "";
+  });
+
+  box.addEventListener('keydown', (e) => {
+    if (e.key === "Backspace") {
+      if (Holder3.textContent.length === 1) {
+        Holder3.textContent = '';
+      } else if (Holder2.textContent.length === 1) {
+        Holder2.textContent = '';
+      } else if (Holder1.textContent.length === 1) {
+        Holder1.textContent = '';
+      }
+    } else if (e.key === "Enter") {
+      if (Holder1.textContent && Holder2.textContent && Holder3.textContent) {
+        const answer = Holder1.textContent + Holder2.textContent + Holder3.textContent;
+        if (answer === aktuellesWortD3.toUpperCase()) {
+          SuccessWindow(4, aktuellesWortD3, ersterVersuch, zweiterVersuch, dritterVersuch, vierterVersuch);
+        } else if (ArrayDeutscheWörter.includes(answer.toLowerCase())) {
+          if (versuchzähler === 1) {
+            ersterVersuch = answer;
+            for (let i = 0; i < 3; i++) {
+              const char = ersterVersuch.charAt(i).toUpperCase();
+              document.getElementById(`V1l${i+1}`).textContent = char;
+              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
+                document.getElementById(`V1l${i+1}`).style.backgroundColor = 'green';
+              } else if (aktuellesWortD3.includes(char.toUpperCase())) {
+                document.getElementById(`V1l${i+1}`).style.backgroundColor = 'orange';
+              } else {
+                document.getElementById(`V1l${i+1}`).style.backgroundColor = 'lightgrey';
+              }
+            }
+          } else if (versuchzähler === 2) {
+            zweiterVersuch = answer;
+            for (let i = 0; i < 3; i++) {
+              const char = zweiterVersuch.charAt(i).toUpperCase();
+              document.getElementById(`V2l${i+1}`).textContent = char;
+              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
+                document.getElementById(`V2l${i+1}`).style.backgroundColor = 'green';
+              } else if (aktuellesWortD3.includes(char.toUpperCase())) {
+                document.getElementById(`V2l${i+1}`).style.backgroundColor = 'orange';
+              } else {
+                document.getElementById(`V2l${i+1}`).style.backgroundColor = 'lightgrey';
+              }
+            }
+          } else if (versuchzähler === 3) {
+            dritterVersuch = answer;
+            for (let i = 0; i < 3; i++) {
+              const char = dritterVersuch.charAt(i).toUpperCase();
+              document.getElementById(`V3l${i+1}`).textContent = char;
+              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
+                document.getElementById(`V3l${i+1}`).style.backgroundColor = 'green';
+              } else if (aktuellesWortD3.includes(char.toUpperCase())) {
+                document.getElementById(`V3l${i+1}`).style.backgroundColor = 'orange';
+              } else {
+                document.getElementById(`V3l${i+1}`).style.backgroundColor = 'lightgrey';
+              }
+            }
+          } else if (versuchzähler === 4) {
+            vierterVersuch = answer;
+            for (let i = 0; i < 3; i++) {
+              const char = vierterVersuch.charAt(i).toUpperCase();
+              document.getElementById(`V4l${i+1}`).textContent = char;
+              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
+                document.getElementById(`V4l${i+1}`).style.backgroundColor = 'green';
+              } else if (aktuellesWortD3.includes(char.toUpperCase())) {
+                document.getElementById(`V4l${i+1}`).style.backgroundColor = 'orange';
+              } else {
+                document.getElementById(`V4l${i+1}`).style.backgroundColor = 'lightgrey';
+              }
+            }
+            endPanel.style.visibility = "visible";
+            document.getElementById('endText').textContent = `The word was ${aktuellesWortD3}`;
+          }
+          versuchzähler++;
+          [Holder1, Holder2, Holder3] = InitialisierenVonHolder();
+        }
+      }
+    }
+  });
 }
 
 //------------------------------------------------------------------------------------------------------------
@@ -484,7 +655,14 @@ function Deutsch6(){
 
 
 function Startgame(){
-  GamemodeView();
+ 
+  if (isMobile) {
+    GamemodeViewMB();
+  } 
+
+  else {
+    GamemodeView();
+  }
 }
 
 function getHeute() {
