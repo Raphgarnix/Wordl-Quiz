@@ -1,0 +1,58 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: darkgreen;
+}
+
+.gamemodeD3Panel{
+
+}
+
+.gamemodeD3Holder{
+    background-color: dimgrey;
+}
+
+.versuchePanel{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.versuch4{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    
+}
+
+.letter{
+    width: 70px;
+    height: 70px;
+    border: 2px solid #d3d6da;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000;
+    box-sizing: border-box;
+    margin: 4px;
+    padding: 20px;
+}
+
+.debugPanel {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 250px;
+  white-space: pre-line;
+}
