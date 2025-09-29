@@ -2,14 +2,6 @@ const body = document.getElementById('body');
 const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 
-
-
-
-
-
-
-
-
 const ArrayDeutscheWörter = [
     "aas", "abt", "ach", "aff", "akt", "alb", "all", "alt", "ami", "amt",
     "ant", "anz", "apf", "arm", "art", "arz", "ast", "ate", "auf", "aug",
