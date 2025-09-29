@@ -138,10 +138,10 @@ const heute = getHeute();
 
 const Deutsch = [
   { date: "25.09.2025", word3: "Axt", word4: "Pech", word5: "Falke", word6: "Zirkel" },
-  { date: "26.09.2025", word3: "Tor", word4: "Moos", word5: "Chaos", word6: "Phantom" },
+  { date: "26.09.2025", word3: "Neu", word4: "Moos", word5: "Chaos", word6: "Phantom" },
   { date: "27.09.2025", word3: "Jux", word4: "Wahn", word5: "Lyric", word6: "tadeln" },
   { date: "28.09.2025", word3: "Top", word4: "Qual", word5: "Zwist", word6: "Fabeln" },
-  { date: "29.09.2025", word3: "Neu", word4: "Zorn", word5: "Myrte", word6: "Quarte" },
+  { date: "29.09.2025", word3: "Tor", word4: "Zorn", word5: "Myrte", word6: "Quarte" },
   { date: "30.09.2025", word3: "Eis", word4: "Funk", word5: "Krebs", word6: "Sphinx" },
   { date: "01.10.2025", word3: "Alt", word4: "Bann", word5: "Talis", word6: "Kabine" },
   { date: "02.10.2025", word3: "Lot", word4: "Riss", word5: "Drang", word6: "Aktion" },
@@ -412,7 +412,7 @@ function Deutsch3() {
 
         else {
           
-          
+
 
         }
       }
