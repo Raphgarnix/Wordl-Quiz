@@ -167,13 +167,33 @@ for(let i = 0; i < Deutsch.length; i++){
 function GamemodeView(){
   body.innerHTML = `
 
-        <div class="gamemodesPanel">
-            <div class="gamemodesObj" onclick="Deutsch3()"> Deutsch 3 Buchstaben <div>
-            <div class="gamemodesObj" onclick="Deutsch4()"> Deutsch 4 Buchstaben <div> 
-            <div class="gamemodesObj" onclick="Deutsch5()"> Deutsch 5 Buchstaben <div> 
-            <div class="gamemodesObj" onclick="Deutsch6()"> Deutsch 6 Buchstaben <div> 
+    <div class="mainmain" id="mainmain">
+        <img src="Sebostil.jpg" class="bgimg">
+        
+        <div class="h1">Premium Wordl</div>
+        
+        <div class="main" id="main">
+            <button class="btn-ghost" style="margin-right:2%" onclick="PlayAudio()">Help</button>
 
+
+            <button disabled class="programmStartButton" id="programmStartButton" onclick="Startgame()">Play</button>
+
+            <button class="btn-ghost" style="margin-left:2%" onclick="PlayAudio()">Credits</button>
         </div>
+    </div>
+
+    <hr class="hs-strong" role="separator" aria-hidden="true">
+
+
+    <div class="gamemodespanel" id="gamemodespanel">
+        
+
+        <button class="gamemodesObj"  onclick="Deutsch3()">De 3 Buchstaben</button>
+        <button class="gamemodesObj"  onclick="Deutsch4()">De 4 Buchstaben</button>
+        <button class="gamemodesObj"  onclick="Deutsch5()">De 5 Buchstaben</button>
+        <button class="gamemodesObj"  onclick="Deutsch6()">De 6 Buchstaben</button>
+
+    </div>
     `;
 }
 
@@ -663,4 +683,14 @@ function getHeute() {
   let monat = String(d.getMonth() + 1).padStart(2, '0');
   let jahr = d.getFullYear();
   return `${tag}.${monat}.${jahr}`;
+}
+
+function PlayAudio() {
+    const audio = new Audio('gayy-echo.mp3');
+    audio.play();
+
+    setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0;
+    }, 1830);
 }
