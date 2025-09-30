@@ -223,10 +223,10 @@ function GamemodeViewMB(){
     <div class="gamemodespanel" id="gamemodespanel">
         
 
-      <div class="gamemodesObj" onclick="Deutsch3MB()"> Deutsch MOBILE3 Buchstaben <div>
-      <div class="gamemodesObj" onclick="Deutsch4MB()"> Deutsch MOBILE 4 Buchstaben <div> 
-      <div class="gamemodesObj" onclick="Deutsch5MB()"> Deutsch MOBILE 5 Buchstaben <div> 
-      <div class="gamemodesObj" onclick="Deutsch6MB()"> Deutsch MOBILE 6 Buchstaben <div> 
+        <button class="gamemodesObj"  onclick="Deutsch3()">De 3 Buchstaben</button>
+        <button class="gamemodesObj"  onclick="Deutsch4()">De 4 Buchstaben</button>
+        <button class="gamemodesObj"  onclick="Deutsch5()">De 5 Buchstaben</button>
+        <button class="gamemodesObj"  onclick="Deutsch6()">De 6 Buchstaben</button>
 
     </div>
     `;
