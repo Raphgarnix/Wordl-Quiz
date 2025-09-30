@@ -201,13 +201,34 @@ function GamemodeView(){
 function GamemodeViewMB(){
   body.innerHTML = `
 
-        <div class="gamemodesPanel">
-            <div class="gamemodesObj" onclick="Deutsch3MB()"> Deutsch MOBILE3 Buchstaben <div>
-            <div class="gamemodesObj" onclick="Deutsch4MB()"> Deutsch MOBILE 4 Buchstaben <div> 
-            <div class="gamemodesObj" onclick="Deutsch5MB()"> Deutsch MOBILE 5 Buchstaben <div> 
-            <div class="gamemodesObj" onclick="Deutsch6MB()"> Deutsch MOBILE 6 Buchstaben <div> 
 
+      <div class="mainmain" id="mainmain">
+        <img src="Sebostil.jpg" class="bgimg">
+        
+        <div class="h1">Premium Wordl</div>
+        
+        <div class="main" id="main">
+            <button class="btn-ghost" style="margin-right:2%" onclick="PlayAudio()">Help</button>
+
+
+            <button disabled class="programmStartButton" id="programmStartButton" onclick="Startgame()">Play</button>
+
+            <button class="btn-ghost" style="margin-left:2%" onclick="PlayAudio()">Credits</button>
         </div>
+    </div>
+
+    <hr class="hs-strong" role="separator" aria-hidden="true">
+
+
+    <div class="gamemodespanel" id="gamemodespanel">
+        
+
+      <div class="gamemodesObj" onclick="Deutsch3MB()"> Deutsch MOBILE3 Buchstaben <div>
+      <div class="gamemodesObj" onclick="Deutsch4MB()"> Deutsch MOBILE 4 Buchstaben <div> 
+      <div class="gamemodesObj" onclick="Deutsch5MB()"> Deutsch MOBILE 5 Buchstaben <div> 
+      <div class="gamemodesObj" onclick="Deutsch6MB()"> Deutsch MOBILE 6 Buchstaben <div> 
+
+    </div>
     `;
 }
 
