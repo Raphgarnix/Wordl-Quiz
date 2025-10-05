@@ -247,6 +247,36 @@ button:disabled, button[disabled]{
 }
 
 
+.device-panel {
+  display: flex;
+  align-items: center;
+  gap: 10px;                  /* Abstand zwischen den Symbolen */
+  padding: 8px 12px;          /* Innenabstand */
+  background-color: #f0f0f0;  /* Panel-Hintergrund */
+  border-radius: 8px;
+  font-size: 24px;             /* Symbolgröße */
+  width: fit-content;          /* Panel passt sich Inhalt an */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  position: fixed;             /* Panel immer sichtbar */
+  bottom: 10px;
+  left: 10px;
+}
+
+/* Optional: unterschiedliche Darstellung je nach Bildschirmgröße */
+@media (max-width: 768px) {
+  .desktop-symbol {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-symbol {
+    display: none;
+  }
+}
+
+
+
 
 
 /* --------------------------------------------------------------------------------------------------------------------- */

@@ -128,7 +128,7 @@ const ArrayDeutscheWörter = [
     "zoo", "zopf", "zorn", "zucht", "zucker", "zudem", "zueignung", "zug",
     "zukunft", "zuname", "zunder", "zunge", "zuruf", "zusammen", "zutat", "zuvor",
     "zuzug", "zwang", "zwei", "zweig", "zwerg", "zwick", "zwilling", "zwirn",
-    "zwist", "zwo", "zyklus", "zyste"
+    "zwist", "zwo", "zyklus", "zyste", "out"
 ];
 
 let aktuellesWortD3 = "";
@@ -139,17 +139,17 @@ let aktuellesWortD6 = "";
 const heute = getHeute();
 
 const Deutsch = [
-  { date: "25.09.2025", word3: "Axt", word4: "Pech", word5: "Falke", word6: "Zirkel" },
-  { date: "26.09.2025", word3: "Neu", word4: "Moos", word5: "Chaos", word6: "Phantom" },
-  { date: "27.09.2025", word3: "Jux", word4: "Wahn", word5: "Lyric", word6: "tadeln" },
-  { date: "28.09.2025", word3: "Top", word4: "Qual", word5: "Zwist", word6: "Fabeln" },
-  { date: "29.09.2025", word3: "Tor", word4: "Zorn", word5: "Myrte", word6: "Quarte" },
-  { date: "30.09.2025", word3: "Eis", word4: "Funk", word5: "Krebs", word6: "Sphinx" },
-  { date: "01.10.2025", word3: "Alt", word4: "Bann", word5: "Talis", word6: "Kabine" },
-  { date: "02.10.2025", word3: "Lot", word4: "Riss", word5: "Drang", word6: "Aktion" },
-  { date: "03.10.2025", word3: "See", word4: "Glut", word5: "Fabel", word6: "Kadenz" },
-  { date: "04.10.2025", word3: "Rad", word4: "Pfad", word5: "Lyrik", word6: "Kasten" },
-  { date: "05.10.2025", word3: "Tor", word4: "Huld", word5: "Krone", word6: "Oberst" }
+  { date: "25.09.2025", word3: "axt", word4: "Pech", word5: "Falke", word6: "Zirkel" },
+  { date: "26.09.2025", word3: "neu", word4: "Moos", word5: "Chaos", word6: "Phantom" },
+  { date: "27.09.2025", word3: "jux", word4: "Wahn", word5: "Lyric", word6: "tadeln" },
+  { date: "28.09.2025", word3: "top", word4: "Qual", word5: "Zwist", word6: "Fabeln" },
+  { date: "29.09.2025", word3: "tor", word4: "Zorn", word5: "Myrte", word6: "Quarte" },
+  { date: "30.09.2025", word3: "eis", word4: "Funk", word5: "Krebs", word6: "Sphinx" },
+  { date: "01.10.2025", word3: "alt", word4: "Bann", word5: "Talis", word6: "Kabine" },
+  { date: "02.10.2025", word3: "lot", word4: "Riss", word5: "Drang", word6: "Aktion" },
+  { date: "03.10.2025", word3: "see", word4: "Glut", word5: "Fabel", word6: "Kadenz" },
+  { date: "04.10.2025", word3: "rad", word4: "Pfad", word5: "Lyrik", word6: "Kasten" },
+  { date: "05.10.2025", word3: "tor", word4: "Huld", word5: "Krone", word6: "Oberst" }
 ];
 
 for(let i = 0; i < Deutsch.length; i++){
@@ -413,7 +413,7 @@ function Deutsch3() {
 
     <div class="endPanel" id="endPanel" style="visibility:hidden;">
       <div class="endText" id="endText"></div>
-      <div class="endButton"></div>
+      <button class="endButton" id="endButton" onclick="GamemodeView()" style="visibility:hidden;">Back</button>
     </div>
 
     <div class="debugPanel" id="debugPanel">
@@ -457,6 +457,7 @@ function Deutsch3() {
   updateDebug();
 
   const endPanel = document.getElementById('endPanel');
+  const endButton = document.getElementById('endButton');
 
   document.removeEventListener('keydown', keyHandler);
   document.addEventListener('keydown', keyHandler);
@@ -496,7 +497,7 @@ function Deutsch3() {
 
     else if (e.key === "Enter") {
       if (Holder1.textContent && Holder2.textContent && Holder3.textContent) {
-        let answer = Holder1.textContent + Holder2.textContent + Holder3.textContent;
+        let answer = (Holder1.textContent + Holder2.textContent + Holder3.textContent).toLowerCase();
 
         Holder1.textContent = '';
         Holder2.textContent = '';
@@ -505,117 +506,31 @@ function Deutsch3() {
         updateDebug();
 
 
-        if (answer === aktuellesWortD3.toUpperCase()) {
-          SuccessWindow(4, aktuellesWortD3, ersterVersuch, zweiterVersuch, dritterVersuch, vierterVersuch);
+        if (answer === aktuellesWortD3) {
+
           document.removeEventListener('keydown', keyHandler);
 
+          endPanel.style.visibility = "visible";
+          document.getElementById('endText').textContent = `You found the word ${aktuellesWortD3} in ${versuchzähler} tries!`;
+          endButton.style.visibility = "visible";
+        }
+        
+        else if (ArrayDeutscheWörter.includes(answer)) {
+               
+          updateGuessRow(answer, versuchzähler);
           updateDebug();
-        
-        } 
-        
-        else if (ArrayDeutscheWörter.includes(answer.toLowerCase())) {
-               if (versuchzähler === 1) {
-            ersterVersuch = answer;
-            
-            
-            for (let i = 0; i < 3; i++) {
-              const char = ersterVersuch.charAt(i).toUpperCase();
-              document.getElementById(`V1l${i+1}`).textContent = char;
-              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
-                document.getElementById(`V1l${i+1}`).style.backgroundColor = 'green';
-              } 
-              else if (aktuellesWortD3.includes(char.toUpperCase())) {
-                document.getElementById(`V1l${i+1}`).style.backgroundColor = 'orange';
-              } 
-              else {
-                document.getElementById(`V1l${i+1}`).style.backgroundColor = 'lightgrey';
-              }
-            }
+          
+          if (versuchzähler === 4) {
 
-            updateDebug();
-
-          }
-
-          else if (versuchzähler === 2) {
-            zweiterVersuch = answer;
-
-            for (let i = 0; i < 3; i++) {
-              const char = zweiterVersuch.charAt(i).toUpperCase();
-              document.getElementById(`V2l${i+1}`).textContent = char;
-              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
-                document.getElementById(`V2l${i+1}`).style.backgroundColor = 'green';
-              } 
-              else if (aktuellesWortD3.includes(char.toUpperCase())) {
-                document.getElementById(`V2l${i+1}`).style.backgroundColor = 'orange';
-              } 
-              else {
-                document.getElementById(`V2l${i+1}`).style.backgroundColor = 'lightgrey';
-              }
-            }
-
-            updateDebug();
-
-          }
-
-          else if (versuchzähler === 3) {
-            dritterVersuch = answer;
-
-            for (let i = 0; i < 3; i++) {
-              const char = dritterVersuch.charAt(i).toUpperCase();
-              document.getElementById(`V3l${i+1}`).textContent = char;
-              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
-                document.getElementById(`V3l${i+1}`).style.backgroundColor = 'green';
-              } 
-              else if (aktuellesWortD3.includes(char.toUpperCase())) {
-                document.getElementById(`V3l${i+1}`).style.backgroundColor = 'orange';
-              } 
-              else {
-                document.getElementById(`V3l${i+1}`).style.backgroundColor = 'lightgrey';
-              }
-            }
-            
-            updateDebug();
-
-          }
-
-          else if (versuchzähler === 4) {
-            vierterVersuch = answer;
-
-            for (let i = 0; i < 3; i++) {
-              const char = vierterVersuch.charAt(i).toUpperCase();
-              document.getElementById(`V4l${i+1}`).textContent = char;
-
-              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
-                document.getElementById(`V4l${i+1}`).style.backgroundColor = 'green';
-              } 
-              else if (aktuellesWortD3.includes(char.toUpperCase())) {
-                document.getElementById(`V4l${i+1}`).style.backgroundColor = 'orange';
-              } 
-              else {
-                document.getElementById(`V4l${i+1}`).style.backgroundColor = 'lightgrey';
-              }
-            }
-            
-            updateDebug();
-            
             document.removeEventListener('keydown', keyHandler);
-
 
             endPanel.style.visibility = "visible";
             document.getElementById('endText').textContent = `The word was ${aktuellesWortD3}`;
-            
+            endButton.style.visibility = "visible";
           }
-
-          updateDebug();
 
           versuchzähler++;
           [Holder1, Holder2, Holder3] = InitialisierenVonHolder();
-
-        }
-
-        else {
-          
-
 
         }
       }
@@ -627,20 +542,21 @@ function Deutsch3() {
 //------------------------------------------------------------------------------------------------------------
 
 
-function SuccessWindow(möglicheVersuche, Lösung, ersterVersuch, zweiterVersuch, dritterVersuch, vierterVersuch, fünfterVersuch, sechsterVersuch){
-  body.innerHTML = `
+function updateGuessRow(guess, rowIndex) {
 
-        <div class="gamemodesPanel">
-            <div class="gamemodesObj" onclick="Deutsch3()"> Deutsch 3 Buchstaben <div>
-            <div class="gamemodesObj" onclick="Deutsch4()"> Deutsch 4 Buchstaben <div> 
-            <div class="gamemodesObj" onclick="Deutsch5()"> Deutsch 5 Buchstaben <div> 
-            <div class="gamemodesObj" onclick="Deutsch6()"> Deutsch 6 Buchstaben <div> 
+  for (let i = 0; i < 3; i++) {
+    const char = guess.charAt(i);
+    const cell = document.getElementById(`V${rowIndex}l${i+1}`);
+    cell.textContent = char;
 
-        </div>
-    `;
-}
-
-function Ende(Buchstaben, möglicheVersuche, Lösung, ersterVersuch, zweiterVersuch, dritterVersuch, vierterVersuch, fünfterVersuch, sechsterVersuch){
+    if (char.toLowerCase() === aktuellesWortD3.charAt(i)) {
+        cell.style.backgroundColor = 'green';
+    } else if (aktuellesWortD3.includes(char.toLowerCase())) {
+        cell.style.backgroundColor = 'orange';
+    } else {
+        cell.style.backgroundColor = 'lightgrey';
+    }
+  }
 
 }
 
