@@ -149,7 +149,7 @@ const Deutsch = [
   { date: "02.10.2025", word3: "Lot", word4: "Riss", word5: "Drang", word6: "Aktion" },
   { date: "03.10.2025", word3: "See", word4: "Glut", word5: "Fabel", word6: "Kadenz" },
   { date: "04.10.2025", word3: "Rad", word4: "Pfad", word5: "Lyrik", word6: "Kasten" },
-  { date: "05.10.2025", word3: "Bus", word4: "Huld", word5: "Krone", word6: "Oberst" }
+  { date: "05.10.2025", word3: "Tor", word4: "Huld", word5: "Krone", word6: "Oberst" }
 ];
 
 for(let i = 0; i < Deutsch.length; i++){
