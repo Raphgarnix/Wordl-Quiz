@@ -194,6 +194,12 @@ function GamemodeView(){
         <button class="gamemodesObj"  onclick="Deutsch6()">De 6 Buchstaben</button>
 
     </div>
+
+    <div class="device-panel">
+    <span class="desktop-symbol">🖥️</span>
+    <span class="mobile-symbol">📱</span>
+    </div>
+
     `;
 }
 
@@ -228,6 +234,12 @@ function GamemodeViewMB(){
         <button class="gamemodesObj"  onclick="Deutsch6MB()">Deutsch MOBILE 6 Buchstaben</button>
 
     </div>
+
+    <div class="device-panel">
+    <span class="desktop-symbol">🖥️</span>
+    <span class="mobile-symbol">📱</span>
+    </div>
+
     `;
 }
 
@@ -270,6 +282,12 @@ function Deutsch3MB() {
       <div class="endText" id="endText"></div>
       <button class="endButton" id="endButton" onclick="GamemodeViewMB()" style="visibility:hidden;">Back</button>
     </div>
+
+    <div class="device-panel">
+    <span class="desktop-symbol">🖥️</span>
+    <span class="mobile-symbol">📱</span>
+    </div>
+
   `;
 
   let versuchzähler = 1;
@@ -281,6 +299,20 @@ function Deutsch3MB() {
     const h2 = document.getElementById(`V${versuchzähler}l2`);
     const h3 = document.getElementById(`V${versuchzähler}l3`);
     return [h1, h2, h3];
+  }
+
+  function updateDebug() {
+  const dbg = document.getElementById("debugText");
+  dbg.textContent =
+    `versuchzähler: ${versuchzähler}\n` +
+    `ersterVersuch: ${ersterVersuch}\n` +
+    `zweiterVersuch: ${zweiterVersuch}\n` +
+    `dritterVersuch: ${dritterVersuch}\n` +
+    `vierterVersuch: ${vierterVersuch}\n` +
+    `aktuellesWortD3: ${aktuellesWortD3}\n` +
+    `Holder1: ${Holder1.textContent}\n` +
+    `Holder2: ${Holder2.textContent}\n` +
+    `Holder3: ${Holder3.textContent}` 
   }
 
   const box = document.getElementById('inputBox');
@@ -398,6 +430,11 @@ function Deutsch3() {
 
     <div class="debugPanel" id="debugPanel">
       <div class="debugText" id="debugText"></div>
+    </div>
+
+    <div class="device-panel">
+    <span class="desktop-symbol">🖥️</span>
+    <span class="mobile-symbol">📱</span>
     </div>
 
   `;
