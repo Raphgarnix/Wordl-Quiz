@@ -268,7 +268,7 @@ function Deutsch3MB() {
 
     <div class="endPanel" id="endPanel" style="visibility:hidden;">
       <div class="endText" id="endText"></div>
-      <div class="endButton"></div>
+      <button class="endButton" id="endButton" onclick="GamemodeViewMB()" style="visibility:hidden;">Back</button>
     </div>
   `;
 
@@ -307,69 +307,48 @@ function Deutsch3MB() {
       } else if (Holder1.textContent.length === 1) {
         Holder1.textContent = '';
       }
-    } else if (e.key === "Enter") {
+
+      updateDebug();
+
+    }
+
+    else if (e.key === "Enter") {
       if (Holder1.textContent && Holder2.textContent && Holder3.textContent) {
-        const answer = Holder1.textContent + Holder2.textContent + Holder3.textContent;
-        if (answer === aktuellesWortD3.toUpperCase()) {
-          SuccessWindow(4, aktuellesWortD3, ersterVersuch, zweiterVersuch, dritterVersuch, vierterVersuch);
-        } else if (ArrayDeutscheWörter.includes(answer.toLowerCase())) {
-          if (versuchzähler === 1) {
-            ersterVersuch = answer;
-            for (let i = 0; i < 3; i++) {
-              const char = ersterVersuch.charAt(i).toUpperCase();
-              document.getElementById(`V1l${i+1}`).textContent = char;
-              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
-                document.getElementById(`V1l${i+1}`).style.backgroundColor = 'green';
-              } else if (aktuellesWortD3.includes(char.toUpperCase())) {
-                document.getElementById(`V1l${i+1}`).style.backgroundColor = 'orange';
-              } else {
-                document.getElementById(`V1l${i+1}`).style.backgroundColor = 'lightgrey';
-              }
-            }
-          } else if (versuchzähler === 2) {
-            zweiterVersuch = answer;
-            for (let i = 0; i < 3; i++) {
-              const char = zweiterVersuch.charAt(i).toUpperCase();
-              document.getElementById(`V2l${i+1}`).textContent = char;
-              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
-                document.getElementById(`V2l${i+1}`).style.backgroundColor = 'green';
-              } else if (aktuellesWortD3.includes(char.toUpperCase())) {
-                document.getElementById(`V2l${i+1}`).style.backgroundColor = 'orange';
-              } else {
-                document.getElementById(`V2l${i+1}`).style.backgroundColor = 'lightgrey';
-              }
-            }
-          } else if (versuchzähler === 3) {
-            dritterVersuch = answer;
-            for (let i = 0; i < 3; i++) {
-              const char = dritterVersuch.charAt(i).toUpperCase();
-              document.getElementById(`V3l${i+1}`).textContent = char;
-              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
-                document.getElementById(`V3l${i+1}`).style.backgroundColor = 'green';
-              } else if (aktuellesWortD3.includes(char.toUpperCase())) {
-                document.getElementById(`V3l${i+1}`).style.backgroundColor = 'orange';
-              } else {
-                document.getElementById(`V3l${i+1}`).style.backgroundColor = 'lightgrey';
-              }
-            }
-          } else if (versuchzähler === 4) {
-            vierterVersuch = answer;
-            for (let i = 0; i < 3; i++) {
-              const char = vierterVersuch.charAt(i).toUpperCase();
-              document.getElementById(`V4l${i+1}`).textContent = char;
-              if (char === aktuellesWortD3.charAt(i).toUpperCase()) {
-                document.getElementById(`V4l${i+1}`).style.backgroundColor = 'green';
-              } else if (aktuellesWortD3.includes(char.toUpperCase())) {
-                document.getElementById(`V4l${i+1}`).style.backgroundColor = 'orange';
-              } else {
-                document.getElementById(`V4l${i+1}`).style.backgroundColor = 'lightgrey';
-              }
-            }
+        let answer = (Holder1.textContent + Holder2.textContent + Holder3.textContent).toLowerCase();
+
+        Holder1.textContent = '';
+        Holder2.textContent = '';
+        Holder3.textContent = '';        
+
+        updateDebug();
+
+
+        if (answer === aktuellesWortD3) {
+
+          document.removeEventListener('keydown', keyHandler);
+
+          endPanel.style.visibility = "visible";
+          document.getElementById('endText').textContent = `You found the word ${aktuellesWortD3} in ${versuchzähler} tries!`;
+          endButton.style.visibility = "visible";
+        }
+        
+        else if (ArrayDeutscheWörter.includes(answer)) {
+               
+          updateGuessRow(answer, versuchzähler);
+          updateDebug();
+          
+          if (versuchzähler === 4) {
+
+            document.removeEventListener('keydown', keyHandler);
+
             endPanel.style.visibility = "visible";
             document.getElementById('endText').textContent = `The word was ${aktuellesWortD3}`;
+            endButton.style.visibility = "visible";
           }
+
           versuchzähler++;
           [Holder1, Holder2, Holder3] = InitialisierenVonHolder();
+
         }
       }
     }
